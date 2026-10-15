@@ -24,6 +24,8 @@ namespace MiracleBoots
         public int ID_Product { get; set; }
         public int ID_Size { get; set; }
         public int ItemsQuantity { get; set; }
+
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProducts> OrderProducts { get; set; }

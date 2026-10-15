@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000"
       Title="ProductPage" FontFamily="Calibri" Background="#FFFFFF">
-
     <Grid>
         <ListView Name="ProductListView">
             <ListView.ItemTemplate>
@@ -36,7 +35,6 @@
                         </Image>
                         <TextBlock Text="{Binding ProductName}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap"></TextBlock>
                         <TextBlock Text="{Binding CategorY, StringFormat=Тип: {0}}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="13" TextWrapping="Wrap"></TextBlock>
-
                         <TextBlock Text="{Binding ProductComposition}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" FontSize="15" TextWrapping="Wrap"></TextBlock>
                         <TextBlock Text="{Binding ProductDescription}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" FontSize="15" TextWrapping="Wrap"></TextBlock>
                         <TextBlock Text="{Binding ProductCost, StringFormat=Цена &#10142; {0}}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap"></TextBlock>
