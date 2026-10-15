@@ -10,5 +10,7 @@ namespace MiracleBoots
     internal class Manager
     {
         public static Frame MainFrame { get; set; }
+        public static Users CurrentUser { get; set; }
+        public static List<OrderProducts> Cart = new List<OrderProducts>();
     }
 }

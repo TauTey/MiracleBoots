@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AuthPage.xaml.cs">
+      <DependentUpon>AuthPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Categories.cs">
       <DependentUpon>KozinModel.tt</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <DependentUpon>KozinModel.tt</DependentUpon>
     </Compile>
     <Page Include="AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AuthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
