@@ -23,6 +23,8 @@ namespace MiracleBoots
         public ProductPage()
         {
             InitializeComponent();
+            var currentProducts = MiracleBootsEntities.GetContext().Products.ToList();
+            ProductListView.ItemsSource = currentProducts;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
