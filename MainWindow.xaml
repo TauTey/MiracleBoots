@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiracleBoots"
         mc:Ignorable="d"
-        Title="ЧудоОбучь" Height="600" Width="1000" FontFamily="Calibri" Icon="rec/ЧудоОбувь.ico" Background="#D2F6E7">
+        Title="ЧудоОбучь" Height="800" Width="1300" FontFamily="Calibri" Icon="rec/ЧудоОбувь.ico" Background="#D2F6E7">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>

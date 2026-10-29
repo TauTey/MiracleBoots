@@ -10,11 +10,12 @@
 
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <TextBlock Text="Вход в систему" FontSize="24" HorizontalAlignment="Center" Margin="5"/>
-            <TextBlock Text="Логин" FontSize="16" Margin="5"/>
+            <TextBlock Text="Вход в систему" FontSize="24" HorizontalAlignment="Center" Margin="5" FontWeight="Bold"/>
+            <TextBlock Text="Логин" FontSize="20" Margin="5" HorizontalAlignment="Center"/>
             <TextBox Name="LoginBox" FontSize="14" Margin="5"/>
-            <Button Name="EnterBtn" Content="Войти" Height="30" Margin="5" Click="EnterBtn_Click"/>
-            <Button Name="GuestBtn" Content="Войти как гость" Height="30" Margin="5" Click="GuestBtn_Click"/>
+            <Button Name="EnterBtn" Content="Войти" Height="30" Margin="5" Click="EnterBtn_Click" FontWeight="Bold"/>
+            <TextBlock Text="Не зарегистрированы?" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+            <Button Name="GuestBtn" Content="Войти как гость" Height="30" Margin="5" Click="GuestBtn_Click" FontWeight="Bold"/>
         </StackPanel>
     </Grid>
 </Page>

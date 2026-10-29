@@ -20,6 +20,9 @@ namespace MiracleBoots
     /// </summary>
     public partial class ProductPage : Page
     {
+        private int _page = 1;
+        private int _pageSize = 10;
+
         List<Products> CurrentPageList = new List<Products>();
         List<Products> TableList;
         public ProductPage()
@@ -50,39 +53,63 @@ namespace MiracleBoots
         }
         private void UpdateProduct()
         {
-            var ctx = MiracleBootsEntities.GetContext();
-            var products = ctx.Products.ToList();
-            var stock = ctx.StockItems.Include("Sizes").ToList();
-
-            foreach (var p in products)
-            {
-                var sizes = stock
-                    .Where(s => s.ID_Product == p.ID_Product && s.ItemsQuantity > 0)
-                    .Select(s => s.Sizes.Size.ToString(System.Globalization.CultureInfo.InvariantCulture))
-                    .ToList();
-
-                p.SizesText = "Размеры: " + string.Join(",     ", sizes);
-            }
-
+            var context = MiracleBootsEntities.GetContext();
+            var currentProducts = context.Products.Include("StockItems.Sizes").ToList();
             var cat = ComboCategory.SelectedItem as Categories;
             if (cat != null && cat.ID_Category != 0)
-                products = products.Where(p => p.ID_Category == cat.ID_Category).ToList();
-
+            {
+                currentProducts = currentProducts
+                    .Where(p => p.ID_Category == cat.ID_Category).ToList();
+            }
             if (!string.IsNullOrWhiteSpace(TBoxSearch.Text))
-                products = products.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+            {
+                string search = TBoxSearch.Text.ToLower();
+                currentProducts = currentProducts.Where(p => (p.ProductName != null && p.ProductName.ToLower().Contains(search)) || (p.ProductDescription != null && p.ProductDescription.ToLower().Contains(search)) || (p.Manufactures != null && p.Manufactures.ManufactureName.ToLower().Contains(search))).ToList();
+            }
+            if (RButtonUp.IsChecked == true)
+                currentProducts = currentProducts.OrderBy(p => p.ProductCost).ToList();
+            else if (RButtonDown.IsChecked == true)
+                currentProducts = currentProducts.OrderByDescending(p => p.ProductCost).ToList();
+            int totalItems = currentProducts.Count;
+            int totalPages = (int)Math.Ceiling((double)totalItems / _pageSize);
+            if (_page > totalPages && totalPages > 0) _page = totalPages;
+            if (_page < 1) _page = 1;
+            var pagedProducts = currentProducts.Skip((_page - 1) * _pageSize).Take(_pageSize).ToList();
+            ProductListView.ItemsSource = pagedProducts;
 
-            if (RButtonUp.IsChecked == true) products = products.OrderBy(p => p.ProductCost).ToList();
-            if (RButtonDown.IsChecked == true) products = products.OrderByDescending(p => p.ProductCost).ToList();
-
-            ProductListView.ItemsSource = products;
-            TBCount.Text = "Найдено: " + products.Count;
+            TBCount.Text = "Найдено: " + totalItems;
+            TBPage.Text = $"Страница {_page} из {Math.Max(1, totalPages)}";
         }
-
-        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e) { UpdateProduct(); }
-        private void ComboCategory_SelectionChanged(object sender, SelectionChangedEventArgs e) { UpdateProduct(); }
-        private void RButtonUp_Checked(object sender, RoutedEventArgs e) { if (IsLoaded) UpdateProduct(); }
-        private void RButtonDown_Checked(object sender, RoutedEventArgs e) { if (IsLoaded) UpdateProduct(); }
-        private void Button_Click(object sender, RoutedEventArgs e) { Manager.MainFrame.Navigate(new AddEditPage()); }
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _page = 1;
+            UpdateProduct();
+        }
+        private void ComboCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _page = 1;
+            UpdateProduct();
+        }
+        private void RButtonUp_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsLoaded) UpdateProduct();
+        }
+        private void RButtonDown_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsLoaded) UpdateProduct();
+        }
+        private void BtnNext_Click(object sender, RoutedEventArgs e)
+        {
+            _page++;
+            UpdateProduct();
+        }
+        private void BtnPrev_Click(object sender, RoutedEventArgs e)
+        {
+            if (_page > 1)
+            {
+                _page--;
+                UpdateProduct();
+            }
+        }
     }
-}
 }

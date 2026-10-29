@@ -11,7 +11,8 @@ namespace MiracleBoots
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -60,10 +61,28 @@ namespace MiracleBoots
                 }
             }
         }
+        public string SizesString
+        {
+            get
+            {
+                if (StockItems == null || !StockItems.Any())
+                {
+                    return "нет";
+                }
+                return string.Join(",", 
+                    StockItems
+                        .Where(si => si.Sizes != null)
+                        .Select(si => si.Sizes.Size)
+                        .Distinct()
+                        .OrderBy(s => s)
+                        .Select(s => s.ToString("0.#")));
+            }
+        }
         public virtual Categories Categories { get; set; }
         public virtual Manufactures Manufactures { get; set; }
         public virtual Subcategories Subcategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockItems> StockItems { get; set; }
+        public string SizesText { get; internal set; }
     }
 }

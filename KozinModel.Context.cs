@@ -21,7 +21,6 @@ namespace MiracleBoots
             if (_context == null)
                 _context = new MiracleBootsEntities();
             return _context;
-                
         }
         public MiracleBootsEntities()
             : base("name=MiracleBootsEntities")
