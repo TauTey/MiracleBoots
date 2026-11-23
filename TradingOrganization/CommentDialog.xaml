@@ -1,0 +1,45 @@
+<Window x:Class="TradingOrganization.CommentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradingOrganization"
+        mc:Ignorable="d"
+        Title="Причина отклонения"
+        Height="400" Width="600"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        FontFamily="Calibri"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="22">
+        <Border Style="{StaticResource CardBorder}" Padding="24">
+            <StackPanel>
+                <TextBlock x:Name="HeadingText" Text="Причина отклонения"
+                           Style="{StaticResource PageTitleText}" FontSize="22"/>
+                <TextBlock x:Name="SubjectText" Style="{StaticResource PageSubtitleText}"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock Text="Комментарий для заведующего"
+                           Style="{StaticResource FieldLabelText}" Margin="0,16,0,6"/>
+                <TextBox x:Name="CommentBox" Style="{StaticResource MultilineTextBox}"
+                         Height="110" MaxLength="500"/>
+
+                <TextBlock x:Name="HintText" Style="{StaticResource MutedText}"
+                           TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                <TextBlock x:Name="ErrorText" Foreground="{StaticResource ErrorBrush}"
+                           FontSize="13" TextWrapping="Wrap" Margin="0,10,0,0"
+                           Visibility="Collapsed"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0">
+                    <Button Content="Отмена" Style="{StaticResource GhostButton}"
+                            FontSize="14" Padding="18,9" Click="Cancel_Click"/>
+                    <Button x:Name="ActionBtn" Content="Отклонить заявку"
+                            Style="{StaticResource DangerButton}"
+                            FontSize="14" Padding="18,9" Margin="8,0,0,0"
+                            Click="Reject_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

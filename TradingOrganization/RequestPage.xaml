@@ -1,0 +1,80 @@
+<Page x:Class="TradingOrganization.RequestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TradingOrganization"
+      mc:Ignorable="d"
+      d:DesignHeight="720" d:DesignWidth="1200"
+      Title="Запрос на изменение данных"
+      Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                  Background="Transparent">
+        <Grid Margin="28,8,28,8" HorizontalAlignment="Center" Width="980">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <TextBlock x:Name="TitleText" Text="Запрос на изменение данных"
+                           Style="{StaticResource PageTitleText}"/>
+                <TextBlock x:Name="SubtitleText" Style="{StaticResource PageSubtitleText}"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" Style="{StaticResource CardBorder}"
+                    Padding="28" Margin="0,16,0,0">
+                <StackPanel>
+                    <!-- Предыдущая заявка / ответ заведующего -->
+                    <Border x:Name="PreviousCard" Background="#F2F5FF"
+                            BorderBrush="{StaticResource NavBrush}"
+                            BorderThickness="1" CornerRadius="10"
+                            Padding="16,12" Margin="0,0,0,18"
+                            Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock x:Name="PreviousTitle" FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource AccentBrush}"/>
+                            <TextBlock x:Name="PreviousMessage" FontSize="14"
+                                       Foreground="{StaticResource TextBrush}"
+                                       TextWrapping="Wrap" Margin="0,5,0,0"/>
+                            <TextBlock x:Name="PreviousComment" FontSize="13"
+                                       FontStyle="Italic"
+                                       Foreground="{StaticResource MutedBrush}"
+                                       TextWrapping="Wrap" Margin="0,6,0,0"
+                                       Visibility="Collapsed"/>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock x:Name="RecipientText" Style="{StaticResource MutedText}"
+                               Margin="0,0,0,14"/>
+
+                    <TextBlock Text="Текст письма заведующему"
+                               Style="{StaticResource FieldLabelText}"/>
+                    <TextBox x:Name="MessageTextBox" Style="{StaticResource MultilineTextBox}"
+                             Height="220" MaxLength="1000"/>
+
+                    <TextBlock Text="Опишите, какие данные указаны неверно и на что их нужно исправить. Например: «Здравствуйте! В моих данных указана неверная дата рождения, исправьте на 12.04.1992»."
+                               Style="{StaticResource MutedText}"
+                               TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                    <TextBlock x:Name="ErrorText" Foreground="{StaticResource ErrorBrush}"
+                               FontSize="13.5" TextWrapping="Wrap" Margin="0,14,0,0"
+                               Visibility="Collapsed"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button x:Name="SendBtn" Content="Отправить заведующему"
+                                Style="{StaticResource NavButton}"
+                                FontSize="15" Padding="24,11"
+                                Click="SendBtn_Click"/>
+                        <Button x:Name="CancelBtn" Content="Отменить"
+                                Style="{StaticResource GhostButton}"
+                                FontSize="15" Padding="20,10"
+                                Click="CancelBtn_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

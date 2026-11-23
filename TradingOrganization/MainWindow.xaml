@@ -1,0 +1,76 @@
+﻿<Window x:Class="TradingOrganization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradingOrganization"
+        mc:Ignorable="d"
+        Title="Торговая организация"
+        Height="820" Width="1320"
+        MinHeight="560" MinWidth="940"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Calibri"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Grid Grid.Row="0" Margin="28,18,28,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Text="Торговая организация"
+                           FontSize="29" FontWeight="Bold"
+                           Foreground="{StaticResource TextBrush}"/>
+                <TextBlock Text="Информационная система управления торговыми точками"
+                           FontSize="13.5"
+                           Foreground="{StaticResource MutedBrush}"
+                           Margin="0,3,0,0"/>
+            </StackPanel>
+
+            <StackPanel x:Name="UserPanel" Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+                <Border Width="46" Height="46" CornerRadius="23"
+                        Background="#E8F8FB" ClipToBounds="True">
+                    <Image x:Name="HeaderAvatar" Stretch="UniformToFill"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center" Margin="11,0,18,0">
+                    <TextBlock x:Name="HeaderName" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextBrush}"/>
+                    <TextBlock x:Name="HeaderRole" FontSize="12"
+                               Foreground="{StaticResource MutedBrush}"/>
+                </StackPanel>
+                <Button x:Name="ProfileBtn" Content="Профиль"
+                        Style="{StaticResource NavButton}"
+                        Click="ProfileBtn_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Содержимое страниц -->
+        <Frame x:Name="MainFrame" Grid.Row="1"
+               NavigationUIVisibility="Hidden"
+               Background="Transparent"
+               ContentRendered="MainFrame_ContentRendered"/>
+
+        <!-- Подвал -->
+        <Grid Grid.Row="2" Margin="28,4,28,16">
+            <Button x:Name="BtnBack" Content="← Назад"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource GhostButton}"
+                    Visibility="Hidden"
+                    Click="BtnBack_Click"/>
+            <TextBlock Text="© 2026 Торговая организация"
+                       HorizontalAlignment="Right" VerticalAlignment="Center"
+                       FontSize="12" Foreground="{StaticResource MutedBrush}"/>
+        </Grid>
+    </Grid>
+</Window>
